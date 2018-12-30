@@ -22,8 +22,9 @@ def linear_check(dffEq):
 #TODO: Automate this instead of having a hardcoded list or use a pre-made list
 dEq_list = [sym.Eq(f(x).diff(x), f(x)**2 - x**2), 
             sym.Eq(f(x).diff(x,x), f(x) + sym.exp(x)),
-            sym.Eq(f(x).diff(x,x,x,x), f(x).diff(x,x) + f(x)),
-            sym.Eq(f(x) * f(x).diff(x,x) - 2*f(x).diff(x), sym.tan(x))]
+            sym.Eq(f(x).diff(x,4), f(x).diff(x,x) + f(x)),
+            sym.Eq(f(x) * f(x).diff(x,x) - 2*f(x).diff(x), sym.tan(x)),
+            sym.Eq(x**2 * f(x).diff(x,4) + 2*f(x)**3 * f(x).diff(x,x) - sym.exp(x)*f(x), 17)]
 
 for diffEq in dEq_list:
     print(linear_check(diffEq))
