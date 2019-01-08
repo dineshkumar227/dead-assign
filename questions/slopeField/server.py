@@ -1,4 +1,5 @@
 import numpy as np
+import sympy as sym
 from matplotlib import pyplot as plt
 from io import BytesIO
 
@@ -20,7 +21,9 @@ def randomize():
 
 #plots slope fields and returns a bitstream
 def plot(coeffs):
-    img = BytesIO()
+#setting extent of graph and number of samples
+    x = np.linspace(-1,1,15)
+    y = np.linspace(-1,1,15)
 
     for j in x:
         for k in y:
@@ -34,32 +37,34 @@ def plot(coeffs):
             plt.plot(domain,fun(j,k),solid_capstyle='projecting',solid_joinstyle='bevel')
 
     plt.grid(True)
-    plt.show()
-    plt.savefig(img, bbox_inches='tight')
-    img.seek(0)
+    img = BytesIO()
+    plt.savefig(img, bbox_inches='tight', format='png')
 
     return img
 
-#setting extent of graph and number of samples
-x = np.linspace(-1,1,15)
-y = np.linspace(-1,1,15)
-
+def generate(data):
 #generating answer plot
-answer_coeffs = randomize()
-answer_plot = plot(answer_coeffs)
+    answer_coeffs = randomize()
+    option_coeffs = []
 
-option_plots = []
-
+#defining a sympy expression for the question
+#TODO clean this up and consolidate into one function
+    x, y = sym.symbols('x y')
+    question = answer_coeffs[0]*x**2 - answer_coeffs[1]*y**2
+    data["params"]["f"] = sym.latex(question)
+    
 #generating other plots for options
-for i in range(3):
-    coeffs = randomize()
-    print(coeffs)
-
-    #avoiding identical options
-    while(coeffs[0] == answer_coeffs[0]):
+    for i in range(3):
         coeffs = randomize()
-    option_plots.append(plot(coeffs))
+        #avoiding identical options
+        while(answer_coeffs in option_coeffs or coeffs in option_coeffs):
+            coeffs = randomize()
+        option_coeffs.append(coeffs)
 
-#TODO embed these png bitstreams as images in question html
-
-print("End of the program")
+    
+    def file(data):
+        if data['filename']=='answer.png':
+            return plot(answer_coeffs)
+        else if data['filename']=='option.png':
+            return plot(option_coeffs.pop())
+return data
