@@ -1,0 +1,20 @@
+{
+	"name": "MATH 185X",
+	"title": "Differential Equations",
+	"options": {
+		"useNewQuestionRenderer": true
+	},
+	"assessmentSets": [],
+	"topics": [
+		{"name": "Matrices", "color": "blue3", "description": "Solving differential equations using matrix exponentiation."},
+		{"name": "Slope Fields", "color": "green3", "description": "Identifying correct slope field for a given equation."},	
+		{"name": "Variation of Parameters", "color": "red3", "description": "Solving differential equations with variation of parameters."},	
+		{"name": "Order and linearity", "color": "purple1", "description": "Identifying order and linearity of differential equations."},
+		{"name": "General Solution", "color": "red1", "description": "Finding the general solution of a given differential equation."},
+		{"name": "Initial value", "color": "red2", "description": "Finding the solution of a differential equation using the initial value of the function."}
+	],
+	"tags": []
+}
+
+		
+		
