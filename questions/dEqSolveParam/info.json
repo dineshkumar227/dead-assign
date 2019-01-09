@@ -1,7 +1,7 @@
 {
-	"uuid": "472c81f3-6ada-4e57-b425-6e558b08b3b8",
-	"title": "Find the matix exponential",
-	"topic": "Matrices",
+	"uuid": "132eeff1-f871-4e32-839c-2874bfed7476",
+	"title": "Solving differential equations(variation of parameters)",
+	"topic": "Variation of Parameters",
 	"tags": ["symbolic"],
 	"type": "v3"
 }
