@@ -1,0 +1,17 @@
+    "title": "Experimental PrairieLearn Homework",
+    "set": "Homework",
+    "number": "1",
+    "allowAccess": [
+        {
+            "credit": 100
+        }
+    ],
+    "zones": [
+        {
+            "questions": [
+                {"id": "slopeField",                "points": 1, "maxPoints": 5},
+                {"id": "matrixExponential",         "points": 2, "maxPoints": 11}
+            ]
+        }
+    ]
+}

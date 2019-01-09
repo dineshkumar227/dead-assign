@@ -1,25 +1,36 @@
 import numpy as np
 import sympy as sym
+import prairelearn as pl
 from sympy import *
 
+def generate(data):
 #range of allowed values, dont want this to be too big to avoid cubersome problems
-nMin = 0
-nMax = 1
+    nMin = 0
+    nMax = 1
 #dimensions of matrix
-matrixRows = matrixCols = 3
+    matrixRows = matrixCols = 3
 
 #generating a random matrix
 #matrix2 = sym.Matrix(np.random.random_integers(nMin, nMax, (3,3)))
 #TODO randomisation creating complex cases, talk to Bronski about math behind this
-A = matrix = sym.Matrix([[2, 0, 1],
-                         [0, 1, 1],
-                         [0, 1, 1]])
+    A = np.array([[2, 0, 1],
+                   [0, 1, 1],
+                   [0, 1, 1]])
+    data["params"]["A"] = pl.to_json(A)
+#TODO Make this more elegant
+    E = np.array([[0, 1, 2],
+                  [3, 4, 5],
+                  [6, 7, 8]])
+    data["params"]["E"] = pl.to_json(E)
 
-t = sym.Symbol('t')
+    matrix = sym.Matrix(A)
+    t = sym.Symbol('t')
+    matrix_exp = sym.simplify(sym.exp(matrix * t))
+    for i in range(len(matrix_exp)):
+        answer_name = "m" + str(i)
+        data["correct_answers"][answer_name] = pl.to_json(matrix_exp[i])
 
-matrix_exp = sym.simplify(sym.exp(matrix * t))
-print(matrix_exp)
-
+    return data
 '''
 TODO: Something is wrong with my math here, check with Bronski
 
