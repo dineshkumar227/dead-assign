@@ -1,6 +1,6 @@
 import numpy as np
 import sympy as sym
-import prairelearn as pl
+import prairielearn as pl
 from sympy import *
 
 def generate(data):
@@ -27,8 +27,8 @@ def generate(data):
     t = sym.Symbol('t')
     matrix_exp = sym.simplify(sym.exp(matrix * t))
     for i in range(len(matrix_exp)):
-        answer_name = "m" + str(i)
-        data["correct_answers"][answer_name] = pl.to_json(matrix_exp[i])
+        ans_name = "m" + str(i)
+        data["correct_answers"][ans_name] = pl.to_json(matrix_exp[i])
 
     return data
 '''
