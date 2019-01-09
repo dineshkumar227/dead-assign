@@ -19,9 +19,9 @@ def generate(data):
     fun = sym.lambdify(x, solution, "numpy")
 
 #finding maxima by finding the minimum of the negative of the function
-    max_x = scipy.optimize.fmin(lambda x: -fun(x), 0, full_output = True)
-    warnflag = max_x[4]
-    maxima = max_x[0]
+    optimize_output = scipy.optimize.fmin(lambda x: -fun(x), 0, full_output = True)
+    warnflag = optimize_output[4]
+    maxima = optimize_output[0]
 
     if warnflag == 0 and maxima > 0:
         answer = str(maxima)
