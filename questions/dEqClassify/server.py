@@ -20,7 +20,7 @@ def generate(data):
 
     for i in range(len(dEq_list)):
         equation_name = chr(97+i)
-        data["params"][equation_name] = dEq_list[i].lhs
+        data["params"][equation_name] = sym.latex(dEq_list[i])
         data["correct_answers"][equation_name+"_l"] = linear_check(dEq_list[i])
         data["correct_answers"][equation_name+"_o"] = sym.ode_order(dEq_list[i], f(x))
 
