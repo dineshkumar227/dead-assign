@@ -4,7 +4,7 @@ x = sym.Symbol('x')
 f = sym.Function('f')
 
 #looks through tuple returned by classify_ode for instances of "linear"
-def linear_check(dffEq):
+def linear_check(diffEq):
     diffEq_class = sym.classify_ode(diffEq, f(x))
     if any("linear" in str_ for str_ in diffEq_class):
         return "linear"
