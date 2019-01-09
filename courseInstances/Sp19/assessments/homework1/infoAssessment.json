@@ -15,7 +15,7 @@
                 {"id": "slopeField",                "points": 1, "maxPoints": 5},
 		{"id": "dEqClassify",               "points": 1, "maxPoints": 5},
                 {"id": "matrixExponential",         "points": 2, "maxPoints": 11},
-                {"id": "dEQMaxima",                 "points": 2, "maxPoints": 11}
+                {"id": "dEqMaxima",                 "points": 2, "maxPoints": 11}
             ]
         }
     ]
