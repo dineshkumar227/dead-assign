@@ -19,12 +19,12 @@ def generate(data):
     fun = sym.lambdify(x, solution, "numpy")
 
 #finding maxima by finding the minimum of the negative of the function
-    optimize_output = scipy.optimize.fmin(lambda x: -fun(x), 0, full_output = True)
+    optimize_output = scipy.optimize.fmin(lambda x: -fun(x), 0, full_output = True, disp = False)
     warnflag = optimize_output[4]
     maxima = optimize_output[0]
 
     if warnflag == 0 and maxima > 0:
-        answer = str(maxima)
+        answer = str(maxima[0])
     data["correct_answers"]["maxima"] = answer
     data["params"]["df"] = sym.latex(diffeq)
     data["params"]["init_disp"] = initial_displacement
