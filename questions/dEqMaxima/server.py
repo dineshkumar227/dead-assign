@@ -20,7 +20,7 @@ def generate(data):
     fun = sym.lambdify(x, solution, "numpy")
 
 #finding maxima by finding the minimum of the negative of the function
-    optimize_output = scipy.optimize.minimize(lambda x: -fun(x), 0)
+    optimize_output = scipy.optimize.minimize(lambda x: fun(x), 0)
     maxima = optimize_output.x[0]
 
     if optimize_output.success == True and maxima > 0:
