@@ -3,6 +3,9 @@ import sympy as sym
 from matplotlib import pyplot as plt
 from io import BytesIO
 
+option_coeffs = []
+answer_coeffs = None
+
 # Differential equation
 def diff(x,y,coeffs):
     return coeffs[0]*x**2 - coeffs[1]*y**2  # ax^2 - by^2
@@ -42,29 +45,29 @@ def plot(coeffs):
 
     return img
 
+def file(data):
+    if data['filename']=='answer.png':
+        return plot(answer_coeffs)
+    elif "option" in data['filename']:
+        i = int(''.join(filter(str.isdigit, data['filename'])))
+        return plot(option_coeffs[i])
+
 def generate(data):
 #generating answer plot
     answer_coeffs = randomize()
-    option_coeffs = []
 
 #defining a sympy expression for the question
 #TODO clean this up and consolidate into one function
     x, y = sym.symbols('x y')
     question = answer_coeffs[0]*x**2 - answer_coeffs[1]*y**2
-    data["params"]["f"] = sym.latex(question)
     
 #generating other plots for options
     for i in range(3):
         coeffs = randomize()
         #avoiding identical options
-        while(answer_coeffs in option_coeffs or coeffs in option_coeffs):
+        while(np.any(option_coeffs in answer_coeffs) or np.any(option_coeffs in coeffs)):
             coeffs = randomize()
         option_coeffs.append(coeffs)
-
-    
-    def file(data):
-        if data['filename']=='answer.png':
-            return plot(answer_coeffs)
-        else if data['filename']=='option.png':
-            return plot(option_coeffs.pop())
+   
+    data["params"]["f"] = sym.latex(question)
 return data
