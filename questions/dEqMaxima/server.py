@@ -2,6 +2,9 @@ import sympy as sym
 import numpy
 import scipy.optimize
 from random import randint
+import warnings
+
+warnings.filterwarnings("ignore")
 
 def generate(data):
     x = sym.Symbol('x')
@@ -10,8 +13,8 @@ def generate(data):
     initial_velocity = randint(0,9)
     answer = "DNE"
 
-    # f"(x) - 3f'(x) + 2f(x) = 0
-    diffeq = f(x).diff(x,2) - 3 * f(x).diff(x) + 2*f(x)
+    # f"(x) + 3f'(x) + 2f(x) = 0
+    diffeq = f(x).diff(x,2) + 3 * f(x).diff(x) + 2*f(x)
     #randomised starting displacment and initial velocity
     conditions = {f(0): initial_displacement, f(x).diff(x).subs(x, 0): initial_velocity}
     #finding f(x) with given initial conditions, using rhs as dsolve returns and equation
