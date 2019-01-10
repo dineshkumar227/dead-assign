@@ -4,7 +4,6 @@ import scipy.optimize
 from random import randint
 import warnings
 
-warnings.filterwarnings("ignore")
 
 def generate(data):
     x = sym.Symbol('x')
@@ -23,7 +22,9 @@ def generate(data):
     fun = sym.lambdify(x, solution, "numpy")
 
     #finding maxima by finding the minimum of the negative of the function
-    optimize_output = scipy.optimize.basinhopping(lambda x: -fun(x), 0, disp = False)
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore")
+        optimize_output = scipy.optimize.basinhopping(lambda x: -fun(x), 0, disp = False)
     maxima = optimize_output.x[0]
 
     if optimize_output.lowest_optimization_result.success == True and maxima > 0:
