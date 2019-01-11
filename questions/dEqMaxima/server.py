@@ -28,7 +28,9 @@ def generate(data):
     maxima = optimize_output.x[0]
 
     if optimize_output.lowest_optimization_result.success == True and maxima > 0:
-        answer = str(round(maxima, 2))
+        answer = str(round(fun(maxima), 2))
+        if len(answer) <= 3:
+            answer = answer + '0'
     data["correct_answers"]["ans"] = answer
     data["params"]["df"] = sym.latex(diffeq)
     data["params"]["init_disp"] = initial_displacement
