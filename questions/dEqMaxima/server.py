@@ -7,17 +7,17 @@ import warnings
 
 def generate(data):
     x = sym.Symbol('x')
-    f = sym.Function('f')
+    y = sym.Function('y')
     initial_displacement = randint(0,9)
     initial_velocity = randint(0,9)
     answer = "DNE"
 
-    # f"(x) + 3f'(x) + 2f(x) = 0
-    diffeq = f(x).diff(x,2) + 3 * f(x).diff(x) + 2*f(x)
+    # y"(x) + 3y'(x) + 2y(x) = 0
+    diffeq = y(x).diff(x,2) + 3 * y(x).diff(x) + 2*y(x)
     #randomised starting displacment and initial velocity
-    conditions = {f(0): initial_displacement, f(x).diff(x).subs(x, 0): initial_velocity}
-    #finding f(x) with given initial conditions, using rhs as dsolve returns and equation
-    solution = sym.simplify(sym.dsolve(diffeq, f(x), ics = conditions)).rhs
+    conditions = {y(0): initial_displacement, y(x).diff(x).subs(x, 0): initial_velocity}
+    #finding y(x) with given initial conditions, using rhs as dsolve returns and equation
+    solution = sym.simplify(sym.dsolve(diffeq, y(x), ics = conditions)).rhs
     #converting function to scipy compatible format
     fun = sym.lambdify(x, solution, "numpy")
 
