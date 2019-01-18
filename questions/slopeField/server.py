@@ -48,7 +48,7 @@ answer_coeffs = randomize()
 for i in range(3):
     coeffs = randomize()
         #avoiding identical options
-    while(coeffs in answer_coeffs):#np.any(option_coeffs in answer_coeffs) or np.any(option_coeffs in coeffs)):
+    while(coeffs in answer_coeffs) or np.any(option_coeffs in coeffs):
         coeffs = randomize()
     option_coeffs.append(coeffs)
 
@@ -71,5 +71,3 @@ def file(data):
     elif "option" in data['filename']:
         i = int(''.join(filter(str.isdigit, data['filename'])))
         return plot(option_coeffs[i])
-
-
